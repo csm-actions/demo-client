@@ -9,15 +9,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
 
       - run: npm i -g prettier
       - run: prettier -w .
 
-      - uses: securefix-action/action@c5696e3325f3906c5054ad80f3b9cdd92d65173b # v0.1.0
+      - uses: csm-actions/securefix-action@4969d4c57163127edebf41790766c859992b1101 # v0.5.1
         with:
+          action: client
           app_id: ${{vars.DEMO_CLIENT_APP_ID}}
           app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
           server_repository: demo-server
