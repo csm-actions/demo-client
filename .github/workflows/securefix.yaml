@@ -25,6 +25,7 @@ jobs:
           # Run the server workflow by workflow_dispatch instead of creating a label
           server_workflow_ref: csm-actions/demo-server/.github/workflows/securefix_dispatch.yaml@main
       - if: always() && steps.securefix.outputs.server_workflow_run_url != ''
-        run: echo "::notice::server workflow run: $SERVER_WORKFLOW_RUN_URL"
+        run: |
+          echo "::notice::server workflow run: $SERVER_WORKFLOW_RUN_URL"
         env:
           SERVER_WORKFLOW_RUN_URL: ${{ steps.securefix.outputs.server_workflow_run_url }}
