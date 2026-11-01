@@ -8,8 +8,9 @@ jobs:
     permissions: {}
     if: github.event.issue.pull_request && contains(fromJSON('["/update-branch", "/ub"]'), github.event.comment.body)
     steps:
-      - uses: csm-actions/update-branch-action@459fdfc22c30361386e65e7fcbe89d79634894d7 # v1.1.1
+      - uses: csm-actions/update-branch-action@pr/603
         with:
           app_id: ${{vars.DEMO_CLIENT_APP_ID}}
           app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
-          server_repository_name: demo-server
+          # Run the server workflow by workflow_dispatch instead of creating a label
+          server_workflow_ref: csm-actions/demo-server/.github/workflows/update_branch_dispatch.yaml@main
