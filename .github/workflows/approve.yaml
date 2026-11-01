@@ -12,12 +12,10 @@ jobs:
       pull-requests: read
       contents: read
     steps:
-      - uses: csm-actions/approve-pr-action@pr/526
+      - uses: csm-actions/approve-pr-action@000639bc62037626041db99bfc464fe7dee2f5c6 # v1.1.0
         with:
           pull_request_number: ${{ github.event.issue.number }}
           app_id: ${{vars.DEMO_CLIENT_APP_ID}}
           app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
           # Run the server workflow by workflow_dispatch instead of creating a label
           server_workflow_ref: csm-actions/demo-server/.github/workflows/approve_dispatch.yaml@main
-          # Temporarily allow suzuki-shunsuke to test csm-actions/approve-pr-action#526
-          allowed_committers: suzuki-shunsuke
