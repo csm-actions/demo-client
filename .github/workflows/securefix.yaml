@@ -16,9 +16,11 @@ jobs:
       - run: npm i -g prettier
       - run: prettier -w .
 
-      - uses: csm-actions/securefix-action@ada5710dddfb54a0a55109e320830a757472ce04 # v0.6.4
+      - uses: csm-actions/securefix-action@67763c722aa5439d48cf062e4eb07676bf2d1650 # v0.6.5
         with:
           action: client
           app_id: ${{vars.DEMO_CLIENT_APP_ID}}
           app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
-          server_repository: demo-server
+          # Run the server workflow by workflow_dispatch.
+          # Managing it with an organization variable lets you change it without fixing workflows.
+          server_workflow_ref: csm-actions/demo-server/.github/workflows/securefix_dispatch.yaml@main
