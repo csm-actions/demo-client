@@ -16,7 +16,18 @@ jobs:
       - run: npm i -g prettier
       - run: prettier -w .
 
-      - uses: csm-actions/securefix-action@6da661e4377faf2d71294c1c09b1c03c161ce7c1 # v0.6.8
+      # Verify committing symlinks (securefix-action v0.7.0)
+      - name: Create symlinks
+        run: |
+          # a new symlink
+          ln -sfn README.md readme-link.md
+          # a new symlink in a subdirectory pointing to the parent directory
+          mkdir -p docs
+          ln -sfn ../LICENSE docs/LICENSE
+          # replace a regular file with a symlink
+          ln -sfn README.md foo.yaml
+
+      - uses: csm-actions/securefix-action@75f446c03c22cc2cfc1c944577dfd0dac5111738 # v0.7.0
         with:
           action: client
           app_id: ${{vars.DEMO_CLIENT_APP_ID}}
